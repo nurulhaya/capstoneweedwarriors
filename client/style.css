@@ -49,11 +49,16 @@ img {
   padding: 10px;
   background-color: #fafafa;
   border-radius: 10px;
-  max-width: 160px;
   text-align: center;
-  margin-top: -5px;
+  margin-top: 10px;
   margin-right: 10px;
-  margin-bottom: 5px;
+  width: 50%;
+  font-size: .85em!important;
+}
+
+#plantOptions {
+  display: flex;
+
 }
 
 #uploadedFilePath {

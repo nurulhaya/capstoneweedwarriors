@@ -55,7 +55,7 @@ async function initializeForm() {
       comments: "minLength[0]", // make comments optional
     },
   });
-  
+
   // listen for file upload to show path
   const fileUploadPath = document.querySelector("#uploadedFilePath");
   document.querySelector("#hidden-new-file").addEventListener("change", () => {
@@ -96,6 +96,7 @@ function restoreInput() {
       field.classList.add("disabled");
     });
     document.querySelector("#clearUserInfoBtn").style.display = "block";
+    document.querySelector('#name-fields').style.display = "none";
     document
       .querySelector("#clearUserInfoBtn")
       .addEventListener("click", (e) => {
@@ -107,6 +108,7 @@ function restoreInput() {
 function clearInput() {
   document.querySelector("#clearUserInfoBtn").style.display = "none";
   localStorage.clear();
+  document.querySelector('#name-fields').style.display = "block";
   resetForm();
   document.querySelectorAll(".saveInput").forEach((field) => {
     field.classList.remove("disabled");
