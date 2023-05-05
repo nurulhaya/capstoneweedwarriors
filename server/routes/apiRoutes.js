@@ -129,4 +129,26 @@ router.route("/custom/:query").get(async (req, res) => {
   }
 });
 
+//oms routes -- need to dynamically populate tickets list, maybe allow a search function through it, 
+//definitely need to have simple post to add to the list 
+//we can assume at ticket stage this has been validated to some extent
+
+router
+  .route("/tickets")
+  .get(async (req, res) => {
+    try{
+      const tickets = await db.Tickets.findAll();
+      const result = 
+        tickets.length > 0 
+          ? {data: tickets}
+          : {message: "There are currently no tickets."};
+        res.json(result);
+      } catch (err){
+        res.json(err)
+      }
+  })
+  .post(async (req,res) => {
+
+  })
+
 export default router;

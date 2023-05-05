@@ -1,1 +1,54 @@
-hello these are tickets
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ticketing System</title>
+  <link rel="stylesheet" href="oms.style.css">
+</head>
+<body>
+  <header>
+    <h1>Ticketing System</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>Create a New Ticket</h2>
+      <form id="ticket-form">
+        <label for="ticket-type">Ticket Type:</label>
+        <select id="ticket-type" name="type" required>
+          <option value="weed-removal">Weed Removal</option>
+          <option value="weed-identification">Weed Identification</option>
+        </select><br><br>
+
+        <label for="ticket-title">Title:</label>
+        <input type="text" id="ticket-title" name="title" required><br><br>
+
+        <label for="ticket-description">Description:</label><br>
+        <textarea id="ticket-description" name="description" required></textarea><br><br>
+
+        <label for="ticket-priority">Priority:</label>
+        <select id="ticket-priority" name="priority" required>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select><br><br>
+
+        <input type="submit" value="Create Ticket">
+      </form>
+    </section>
+
+    <section>
+      <h2>Ticket List</h2>
+      <ul id="ticket-list">
+        <!-- Placeholder for dynamically generated ticket items -->
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Footer content goes here.</p>
+  </footer>
+
+  <script src="oms.script.js" type="module"></script>
+ 
+</body>
+</html>
