@@ -94,45 +94,81 @@ generated distribution version of the project.
 
 ## API
 
-### catalog
+### Data catalog
 
-`.../api/catalog`
+* GET `/api/catalog` - Current data catalog entries in the database.
+``` javascript
+  await fetch("/api/catalog");
+```
+### Severity
+* GET `/api/severity` - Current severity category entries in the database.
+``` javascript
+  await fetch("/api/severity");
+```
+### Media
+* GET `/api/media` - Current media entries in the database.
+``` javascript
+  await fetch("/api/media");
+```
+* POST `/api/media` - Create a new media entry, requires url in request body. Example:
 
-<!-- Supported options and result fields for the `useBasicFetch` hook are listed below. -->
+``` javascript
+  await fetch("/api/media", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      url: 'https://site.com/example.png',
+    }),
+  })
+    .then((res) => res.json())
+    .then((json) => console.log(json));
+```
+### Users
+* GET `/api/users` - Current user entries in the database.
+``` javascript
+  await fetch("/api/users");
+```
+* POST `/api/users` - Create a new user entry, requires first name, last name, and email in request body. Example:
 
+``` javascript
+  await fetch("/api/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      first_name: 'First',
+      last_name: 'Last',
+      email: 'your@email.com',
+    }),
+  })
+    .then((res) => res.json())
+    .then((json) => console.log(json));
+```
+### Reports
+* GET `/api/reports` - Current report entries in the database.
+``` javascript
+  await fetch("/api/reports");
+```
+* POST `/api/reports` - Create a new report entry. Example:
 
-<!-- ## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
-
-1.  Fork it!
-2.  Create your feature branch: `git checkout -b my-new-feature`
-3.  Add your changes: `git add .`
-4.  Commit your changes: `git commit -am 'Add some feature'`
-5.  Push to the branch: `git push origin my-new-feature`
-6.  Submit a pull request :sunglasses:
-
-## Credits
-
-TODO: Write credits
-
-## Built With
-
-* Dropwizard - Bla bla bla
-* Maven - Maybe
-* Atom - ergaerga
-* Love
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
-## Authors
-
-* **John Doe** - *Initial work* - [JohnDoe](https://github.com/JohnDoe)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-[MIT License](https://andreasonny.mit-license.org/2019) © Andrea SonnY -->
+``` javascript
+  await fetch("/api/reports", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      catalog_id: 1,
+      location: '(31.007027, -73.922880)',
+      severity_id: 1,
+      media_id: 1,
+      comments: 'N/A',
+      user_id: 1,
+    }),
+  })
+    .then((res) => res.json())
+    .then((json) => console.log(json));
+```
