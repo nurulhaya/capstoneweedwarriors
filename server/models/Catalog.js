@@ -2,7 +2,7 @@ export default (database, DataTypes) => {
   const Catalog = database.define(
     'catalog',
     {
-      catalog_id: {
+      id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true

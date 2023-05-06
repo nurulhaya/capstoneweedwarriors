@@ -2,7 +2,7 @@ export default (database, DataTypes) => {
     const Users = database.define(
         'users',
         {
-            user_id: {
+            id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 primaryKey: true

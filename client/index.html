@@ -10,7 +10,9 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" />
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
-    <link rel="stylesheet" href="//brick.freetls.fastly.net/Karla:400,700,400i,700i" />
+    <link rel="stylesheet" href="//brick.freetls.fastly.net/Karla:400,700,400i,700i" /> <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" type="module"></script>
 </head>
@@ -39,6 +41,7 @@
                     </div>
                     <div id="clearUserInfoBtn">Clear user info</div>
                 </div>
+                <div id="map" class="extraspace"></div>
                 <div class="field extraspace">
                     <label>Position</label>
                     <div class="ui disabled input">
@@ -92,6 +95,9 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
 </body>
 
 </html>

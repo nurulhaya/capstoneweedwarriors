@@ -76,3 +76,9 @@ img {
   cursor: pointer;
   color: red;
 }
+
+#map { height: 180px; margin-bottom: 20px;}
+
+.leaflet-control-attribution {
+  display:none!important
+}

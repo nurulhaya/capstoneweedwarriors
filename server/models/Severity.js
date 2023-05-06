@@ -2,7 +2,7 @@ export default (database, DataTypes) => {
     const Severity = database.define(
         'severity',
         {
-            severity_id: {
+            id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 primaryKey: true
