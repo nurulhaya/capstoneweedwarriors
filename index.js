@@ -15,14 +15,15 @@ const multer = Multer({
         fileSize: 5 * 1024 * 1024,
     },
 });
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID, GCPROJECT_ID, GCBUCKET, GCKEYS } = process.env;
 
-let projectId = process.env.PROJECT_ID;
-let keyFilename = process.env.GC_CREDS;
+let projectId = process.env.GCPROJECT_ID;
+let keyFilename = process.env.GCKEYS;
 const storage = new Storage({
     projectId,
     keyFilename,
 });
-const bucket = storage.bucket(process.env.BUCKET);
+const bucket = storage.bucket(process.env.GCBUCKET);
 const app = express();
 const PORT = process.env.PORT || 3000;
 

@@ -4,6 +4,7 @@ export default (database, DataTypes) => {
       {
         ticket_id: {
             type: DataTypes.INTEGER,
+            autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },

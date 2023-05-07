@@ -4,10 +4,11 @@ export default (database, DataTypes) => {
     {
       id: {
         type: DataTypes.INTEGER,
+        autoIncrement: true,
         allowNull: false,
         primaryKey: true
       },
-      symbol: {
+      usda_symbol: {
         type: DataTypes.STRING,
         allowNull: false
       },

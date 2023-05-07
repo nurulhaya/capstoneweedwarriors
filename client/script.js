@@ -3,19 +3,20 @@ let map;
 
 document.addEventListener("DOMContentLoaded", async () => {
   await initializeForm();
-  // let layerGroup = L.layerGroup().addTo(map);
-  // let marker;
-  map = L.map("map", { doubleClickZoom: false, zoomControl: false })
+  
+  map = L.map("map", { doubleClickZoom: false, zoomControl: false });
   map.locate({
-    setView: true
+    setView: true,
   });
-L.tileLayer(`https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=76506c0cca54471c8ab044c3d9bb37cd`,
 
-{useCache: true,
-crossOrigin: true}).addTo(map);
+  L.tileLayer(
+    `https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=76506c0cca54471c8ab044c3d9bb37cd`,
+    { useCache: true, crossOrigin: true }
+  ).addTo(map);
 
   $form.removeClass("loading");
   navigator.geolocation.getCurrentPosition(setUserCoordinates);
+
   $form.on("submit", async function (e) {
     e.preventDefault();
     if ($form.form("is valid")) {
@@ -34,17 +35,12 @@ crossOrigin: true}).addTo(map);
 function setUserCoordinates(position) {
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
-  document.querySelector("#position").value = `(${lat}, ${lon})`;
-  // layerGroup.clearLayers();\
-  // marker.remove;
-  // marker = 
+  document.querySelector("#position").value = `${lat},${lon}`;
   map.locate({
     setView: true,
-    maxZoom: 50
+    maxZoom: 50,
   });
   L.marker([lat, lon]).addTo(map);
-  // map.setView([lat, lon], 46)
-  // updateMarker(lat, lon)
 }
 
 function uuidv4() {
@@ -85,7 +81,6 @@ async function getMediaID() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id: mediaID,
       url: mediaURL,
     }),
   })
@@ -107,19 +102,18 @@ async function getUserID(userInput) {
     const usersFetch = await fetch("api/users");
     const users = await usersFetch.json();
     userID = users.data ? users.data.length + 1 : 1;
-    await addUser(userID, userInput);
+    await addUser(userInput);
   }
   return userID;
 }
 
-async function addUser(userID, userInput) {
+async function addUser(userInput) {
   await fetch("/api/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id: userID,
       first_name: userInput.first_name,
       last_name: userInput.last_name,
       email: userInput.email,
@@ -136,7 +130,7 @@ async function addReport(mediaID, userID, userInput) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      timestamp: new Date().toISOString().slice(0, 19).replace("T", " "), // FIX TIMEZONE
+      // timestamp: new Date().toISOString().slice(0, 19).replace("T", " "), // FIX TIMEZONE
       catalog_id: userInput.plant.split(",")[0],
       location: userInput.position,
       severity_id: Math.round(userInput.severity / 10),
@@ -241,7 +235,7 @@ function restoreInput() {
       field.classList.add("disabled");
     });
     document.querySelector("#clearUserInfoBtn").style.display = "block";
-    document.querySelector('#name-fields').style.display = "none";
+    document.querySelector("#name-fields").style.display = "none";
     document
       .querySelector("#clearUserInfoBtn")
       .addEventListener("click", (e) => {
@@ -253,7 +247,7 @@ function restoreInput() {
 function clearInput() {
   document.querySelector("#clearUserInfoBtn").style.display = "none";
   localStorage.clear();
-  document.querySelector('#name-fields').style.display = "block";
+  document.querySelector("#name-fields").style.display = "block";
   resetForm();
   document.querySelectorAll(".saveInput").forEach((field) => {
     field.classList.remove("disabled");

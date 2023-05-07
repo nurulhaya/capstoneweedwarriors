@@ -4,19 +4,20 @@ export default (database, DataTypes) => {
       {
         id: {
           type: DataTypes.INTEGER,
+          autoIncrement: true,
           allowNull: false,
           primaryKey: true,
         },
-        timestamp: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
+        // timestamp: {
+        //   type: DataTypes.STRING,
+        //   allowNull: false,
+        // },
         catalog_id: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
         location: {
-          type: DataTypes.STRING, //GEOGRAPHY("POINT"),
+          type: DataTypes.GEOGRAPHY("POINT", 4326),
           allowNull: false,
         },
         severity_id: {
@@ -44,9 +45,9 @@ export default (database, DataTypes) => {
       {
         freezeTableName: true,
         timestamps: false
-      //   timestamps: true,
-      //   createdAt: true,
-      //   updatedAt: false,
+        // timestamps: true,
+        // createdAt: true,
+        // updatedAt: false,
       }
     );
     return Reports;

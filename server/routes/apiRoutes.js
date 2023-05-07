@@ -10,14 +10,9 @@ router.route("/").get((req, res) => {
 
 router.route("/catalog").get(async (req, res) => {
   try {
-    const catalog = await db.sequelizeDB.query(
-      "SELECT * FROM catalog ORDER BY common_name",
-      { type: sequelize.QueryTypes.SELECT }
-    );
+    const catalog = await db.Catalog.findAll();
     const result =
-      catalog.length > 0
-        ? { data: catalog }
-        : { message: "No results found" };
+      catalog.length > 0 ? { data: catalog } : { message: "No results found" };
     res.json(result);
   } catch (err) {
     res.send(err);
@@ -48,7 +43,6 @@ router
   .post(async (req, res) => {
     try {
       await db.Media.create({
-        media_id: req.body.media_id,
         url: req.body.url,
       });
       res.send({ message: "Media added" });
@@ -72,14 +66,13 @@ router
   .post(async (req, res) => {
     try {
       await db.Users.create({
-        user_id: req.body.user_id,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        email: req.body.email
-      })
-      res.send({ message: "User added" })
+        email: req.body.email,
+      });
+      res.send({ message: "User added" });
     } catch (err) {
-      res.json(err)
+      res.json(err);
     }
   });
 
@@ -98,19 +91,20 @@ router
     }
   })
   .post(async (req, res) => {
-    const reports = await db.Reports.findAll();
-    const currentId = reports.length > 0 ? reports[0].length + 1 : 1;
+    const coordinates = req.body.location.split(',')
+    const point = { 'type': 'Point', 'coordinates': [parseFloat(coordinates[0]), parseFloat(coordinates[1])],
+    crs: { type: 'name', properties: { name: 'EPSG:4326'} } }; 
+    console.log(point.coordinates)
     try {
       await db.Reports.create({
-        report_id: currentId,
         timestamp: req.body.timestamp,
         catalog_id: req.body.catalog_id,
-        location: req.body.location,
+        location: await point,
         severity_id: req.body.severity_id,
         media_id: req.body.media_id,
         comments: req.body.comments,
         user_id: req.body.user_id,
-        verified: 0,
+        verified: false,
       });
       res.send({ message: "Report added" });
     } catch (err) {
@@ -129,26 +123,24 @@ router.route("/custom/:query").get(async (req, res) => {
   }
 });
 
-//oms routes -- need to dynamically populate tickets list, maybe allow a search function through it, 
-//definitely need to have simple post to add to the list 
+//oms routes -- need to dynamically populate tickets list, maybe allow a search function through it,
+//definitely need to have simple post to add to the list
 //we can assume at ticket stage this has been validated to some extent
 
 router
   .route("/tickets")
   .get(async (req, res) => {
-    try{
+    try {
       const tickets = await db.Tickets.findAll();
-      const result = 
-        tickets.length > 0 
-          ? {data: tickets}
-          : {message: "There are currently no tickets."};
-        res.json(result);
-      } catch (err){
-        res.json(err)
-      }
+      const result =
+        tickets.length > 0
+          ? { data: tickets }
+          : { message: "There are currently no tickets." };
+      res.json(result);
+    } catch (err) {
+      res.json(err);
+    }
   })
-  .post(async (req,res) => {
-
-  })
+  .post(async (req, res) => { });
 
 export default router;
