@@ -16,13 +16,13 @@ const multer = Multer({
     },
 });
 
-let projectId = process.env.PROJECT_ID;
-let keyFilename = process.env.GC_CREDS;
+let projectId = process.env.GCPROJECT_ID;
+let keyFilename = process.env.GCKEYS;
 const storage = new Storage({
     projectId,
     keyFilename,
 });
-const bucket = storage.bucket(process.env.BUCKET);
+const bucket = storage.bucket(process.env.GCBUCKET);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -38,10 +38,10 @@ app.post("/upload", multer.single("hidden-new-file"), (req, res) => {
             const blobStream = blob.createWriteStream();
 
             blobStream.on("finish", () => {
-                res.status(200).send("Success");
+                res.status(200).send("Successfully uploaded image");
             });
             blobStream.end(req.file.buffer);
-        } else throw "Error with img";
+        } else throw "Error with image";
     } catch (error) {
         res.status(500).send(error);
     }

@@ -2,12 +2,13 @@ export default (database, DataTypes) => {
   const Catalog = database.define(
     'catalog',
     {
-      catalog_id: {
+      id: {
         type: DataTypes.INTEGER,
+        autoIncrement: true,
         allowNull: false,
         primaryKey: true
       },
-      symbol: {
+      usda_symbol: {
         type: DataTypes.STRING,
         allowNull: false
       },

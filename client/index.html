@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
     <link rel="stylesheet" href="//brick.freetls.fastly.net/Karla:400,700,400i,700i" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" type="module"></script>
 </head>
@@ -37,9 +38,9 @@
                     <div class="ui input saveInput">
                         <input type="text" name="email" placeholder="user@email.com" id="email" />
                     </div>
-                    <p></p>
-                    <span id="clearUserInfoBtn">Clear user info</span>
+                    <div id="clearUserInfoBtn">Clear user info</div>
                 </div>
+                <div id="map" class="extraspace"></div>
                 <div class="field extraspace">
                     <label>Position</label>
                     <div class="ui disabled input">
@@ -53,13 +54,14 @@
                         <i class="dropdown icon"></i>
                         <div class="default text"></div>
                     </div>
-                    <p></p>
-                    <span id="plantGuide">
-                        <a href="PlantGuide.pdf" target="_blank">See common weeds &nbsp; <i class="file pdf icon"></i></a>
-                    </span>
-                    <span id="plantIdentifier">
-                        <a href="https://plant.id" target="_blank">Plant identifier &nbsp; <i class="leaf icon"></i></a>
-                    </span>
+                    <div id="plantOptions">
+                        <div id="plantGuide">
+                            <a href="PlantGuide.pdf" target="_blank">See common weeds</a>
+                        </div>
+                        <div id="plantIdentifier">
+                            <a href="https://plant.id" target="_blank">Plant identifier</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="field extraspace">
                     <label>Severity</label>
@@ -90,6 +92,7 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 </body>
 
 </html>

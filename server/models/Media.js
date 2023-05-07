@@ -2,8 +2,9 @@ export default (database, DataTypes) => {
     const Media = database.define(
         'media',
         {
-            media_id: {
+            id: {
                 type: DataTypes.INTEGER,
+                autoIncrement: true,
                 allowNull: false,
                 primaryKey: true
             },
