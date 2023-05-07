@@ -2,21 +2,21 @@ export default (database, DataTypes) => {
     const Tickets = database.define(
       'tickets',
       {
-        ticket_id: {
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
-        ticket_title: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        ticket_description: {
+        description: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        ticket_priority: {
+        priority: {
             type: DataTypes.STRING,
             allowNull: false
         } 
