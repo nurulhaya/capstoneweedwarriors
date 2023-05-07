@@ -17,7 +17,7 @@ export default (database, DataTypes) => {
           allowNull: false,
         },
         location: {
-          type: DataTypes.GEOGRAPHY("POINT", 4326),
+          type: DataTypes.GEOMETRY("POINT"),
           allowNull: false,
         },
         severity_id: {

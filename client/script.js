@@ -124,14 +124,16 @@ async function addUser(userInput) {
 }
 
 async function addReport(mediaID, userID, userInput) {
+  const coordinates = userInput.position.split(',')
   await fetch("/api/reports", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      // timestamp: new Date().toISOString().slice(0, 19).replace("T", " "), // FIX TIMEZONE
       catalog_id: userInput.plant.split(",")[0],
+      latitude: parseFloat(coordinates[0]),
+      longitude: parseFloat(coordinates[1]),
       location: userInput.position,
       severity_id: Math.round(userInput.severity / 10),
       media_id: mediaID,

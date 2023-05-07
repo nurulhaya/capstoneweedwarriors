@@ -91,15 +91,11 @@ router
     }
   })
   .post(async (req, res) => {
-    const coordinates = req.body.location.split(',')
-    const point = { 'type': 'Point', 'coordinates': [parseFloat(coordinates[0]), parseFloat(coordinates[1])],
-    crs: { type: 'name', properties: { name: 'EPSG:4326'} } }; 
-    console.log(point.coordinates)
     try {
       await db.Reports.create({
         timestamp: req.body.timestamp,
         catalog_id: req.body.catalog_id,
-        location: await point,
+        location: { type: 'Point', coordinates: [req.body.latitude, req.body.longitude] },
         severity_id: req.body.severity_id,
         media_id: req.body.media_id,
         comments: req.body.comments,
