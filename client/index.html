@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/favicon.ico" />
+    <title>Weed Warriors</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+    <link rel="stylesheet" href="//brick.freetls.fastly.net/Karla:400,700,400i,700i" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" type="module"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <img src="/images/ca-logo.png" id="logo" />
+            <h1 class="title">Report an invasive plant</h1>
+            <form class="ui loading form" autocomplete="off">
+                <div class="field" id="name-fields">
+                    <label>Your name</label>
+                    <div class="two fields extraspace">
+                        <div class="field saveInput">
+                            <input type="text" name="first_name" placeholder="First Name" />
+                        </div>
+                        <div class="field saveInput">
+                            <input type="text" name="last_name" placeholder="Last Name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="field extraspace">
+                    <label>Email address</label>
+                    <div class="ui input saveInput">
+                        <input type="text" name="email" placeholder="user@email.com" id="email" />
+                    </div>
+                    <div id="clearUserInfoBtn">Clear user info</div>
+                </div>
+                <div id="map" class="extraspace"></div>
+                <div class="field extraspace">
+                    <label>Position</label>
+                    <div class="ui disabled input">
+                        <input type="text" placeholder="Getting coordinates..." id="position" name="position" />
+                    </div>
+                </div>
+                <div class="field extraspace">
+                    <label>Plant type</label>
+                    <div class="ui fluid search selection dropdown plant">
+                        <input type="hidden" id="plant" name="plant" />
+                        <i class="dropdown icon"></i>
+                        <div class="default text"></div>
+                    </div>
+                    <div id="plantOptions">
+                        <div id="plantGuide">
+                            <a href="PlantGuide.pdf" target="_blank">See common weeds</a>
+                        </div>
+                        <div id="plantIdentifier">
+                            <a href="https://plant.id" target="_blank">Plant identifier</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="field extraspace">
+                    <label>Severity</label>
+                    <div class="ui fluid search selection dropdown severity">
+                        <input type="hidden" id="severity" name="severity" />
+                        <i class="dropdown icon"></i>
+                        <div class="default text"></div>
+                    </div>
+                </div>
+                <div class="field extraspace">
+                    <label>Please include a photo of your observation</label>
+                    <div>
+                        <label for="hidden-new-file" class="ui basic icon button">
+                            <i class="cloud upload icon"></i>&nbsp; Upload file
+                        </label>
+                        <input type="file" id="hidden-new-file" name="file" accept="image/jpeg" />
+                        <p id="uploadedFilePath"></p>
+                    </div>
+                </div>
+                <div class="field extraspace">
+                    <label>Comments</label>
+                    <textarea rows="2" name="comments"></textarea>
+                </div>
+                <button class="ui blue button" type="submit" id="submitBtn">Submit</button>
+            </form>
+            <div class="ui positive message" id="successMessage">
+                <div class="header">Successfully submitted</div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+</body>
+
+</html>
