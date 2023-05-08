@@ -36,9 +36,9 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
       .then((json) => console.log(json));
   }
   document.addEventListener("DOMContentLoaded", async () => {
-    tickets = (await fetch('/api/tickets')).json();
-
-    tickets.array.forEach(element => {
+    let tickets = await fetch('/api/tickets')
+    tickets = await tickets.json();
+    tickets.data.forEach(element => {
       var ticketItem  = document.createElement('li')
       ticketItem.innerHTML = '<strong>' + element.title + '</strong> - ' + element.description + ' (' + element.priority + ')';
       document.getElementById('ticket-list').appendChild(ticketItem)
