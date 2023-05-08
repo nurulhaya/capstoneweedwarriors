@@ -137,6 +137,16 @@ router
       res.json(err);
     }
   })
-  .post(async (req, res) => { });
+  .post(async (req, res) => { 
+    try{
+      await db.Tickets.create({
+        title: req.body.title,
+        description: req.body.description,
+        priority: req.body.priority 
+      })
+    } catch(err) {
+      res.json(err)
+    }
+  });
 
 export default router;
