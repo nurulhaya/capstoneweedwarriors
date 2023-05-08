@@ -51,6 +51,10 @@ router.get('/oms', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/oms.html'));
 });
 
+router.get('/db', function (req, res) {
+    res.sendFile(path.join(__dirname + '/client/db.html'));
+});
+
 router.get('/map', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/map.html'));
 });
