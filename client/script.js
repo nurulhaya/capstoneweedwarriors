@@ -3,19 +3,20 @@ let map;
 
 document.addEventListener("DOMContentLoaded", async () => {
   await initializeForm();
-  
-  map = L.map("map", { doubleClickZoom: false, zoomControl: false });
-  map.locate({
-    setView: true,
+
+  map = L.map("map", {
+    doubleClickZoom: false,
+    zoomControl: false,
+    minZoom: 16,
   });
 
   L.tileLayer(
     `https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=76506c0cca54471c8ab044c3d9bb37cd`,
-    { useCache: true, crossOrigin: true }
+    { useCache: true }
   ).addTo(map);
 
-  $form.removeClass("loading");
   navigator.geolocation.getCurrentPosition(setUserCoordinates);
+  $form.removeClass("loading");
 
   $form.on("submit", async function (e) {
     e.preventDefault();
@@ -38,8 +39,10 @@ function setUserCoordinates(position) {
   document.querySelector("#position").value = `${lat},${lon}`;
   map.locate({
     setView: true,
-    maxZoom: 50,
-  });
+    enableHighAccuracy: true,
+    // watch:true
+    // https://leafletjs.com/reference.html#locate-options
+  })
   L.marker([lat, lon]).addTo(map);
 }
 
@@ -124,7 +127,7 @@ async function addUser(userInput) {
 }
 
 async function addReport(mediaID, userID, userInput) {
-  const coordinates = userInput.position.split(',')
+  const coordinates = userInput.position.split(",");
   await fetch("/api/reports", {
     method: "POST",
     headers: {
