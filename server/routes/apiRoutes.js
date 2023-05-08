@@ -144,6 +144,7 @@ router
         description: req.body.description,
         priority: req.body.priority 
       })
+      res.send({ message: "Ticket added" });
     } catch(err) {
       res.json(err)
     }
