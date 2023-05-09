@@ -22,7 +22,7 @@ export default (database, DataTypes) => {
         },
         status: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         }
       },
 

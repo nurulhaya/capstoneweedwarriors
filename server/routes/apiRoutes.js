@@ -158,8 +158,17 @@ router
           id: req.body.id
         }
       })
-      res.send({message: `ticket id ${req.body.id} removed`})
+      res.send({message: `ticket id ${req.body.id} removed.`})
     } catch (err) {
+      res.json(err)
+    }
+  })
+  .put(async (req,res) => {
+    try{
+      await db.Tickets.update({status: 'Resolved'},{where: {id: req.body.id}}
+      )
+      res.send({message: `ticket id ${req.body.id} has been resolved.`})
+    }catch (err){
       res.json(err)
     }
   });

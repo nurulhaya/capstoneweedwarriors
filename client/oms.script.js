@@ -33,6 +33,7 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
         title: title,
         description: description,
         priority: priority,
+        status: 'Pending assignment'
       }),
     })
       .then((res) => res.json())
@@ -69,7 +70,7 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
     //ask to confirm, then remove ticket from tickets list  --- or just update with a resolvedate - takes currentdatetime 
     console.log(ticketItem.id)
     await fetch('/api/tickets',{
-      method: 'DELETE',
+      method: 'PUT',
       headers: {
         "Content-Type": "application/json",
       },
@@ -80,6 +81,8 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
       .then((res) => res.json())
       .then((json) => console.log(json));
 
+
+    // Ticket is removed from list on front end, but remains in tickets table
     document.getElementById('ticket-list').removeChild(ticketItem);
   }
   function updateTicket(){
@@ -94,7 +97,9 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
     tickets = await tickets.json();
 
     if (tickets.found == true){
-      tickets.data.forEach(element => {buildTicket(element)});
+      tickets.data.forEach(element => {
+        if(element.status != 'Resolved' )
+        buildTicket(element)});
       CURRENTTICKETID = tickets.data.length
     }
 
