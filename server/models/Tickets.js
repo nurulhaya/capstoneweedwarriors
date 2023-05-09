@@ -19,7 +19,11 @@ export default (database, DataTypes) => {
         priority: {
             type: DataTypes.STRING,
             allowNull: false
-        } 
+        },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
       },
 
       { freezeTableName: true, timestamps: false }

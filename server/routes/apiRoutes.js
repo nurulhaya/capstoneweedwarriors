@@ -130,8 +130,10 @@ router
       const tickets = await db.Tickets.findAll();
       const result =
         tickets.length > 0
-          ? { data: tickets }
-          : { message: "There are currently no tickets." };
+          ? { data: tickets,
+              found: true}
+          : { message: "There are currently no tickets." ,
+              found: false};
       res.json(result);
     } catch (err) {
       res.json(err);
@@ -148,6 +150,39 @@ router
     } catch(err) {
       res.json(err)
     }
+  })
+  .delete(async (req,res) => {
+    try{
+      await db.Tickets.destroy({
+        where : {
+          id: req.body.id
+        }
+      })
+      res.send({message: `ticket id ${req.body.id} removed`})
+    } catch (err) {
+      res.json(err)
+    }
   });
-
+/*
+router.route('/tickets')
+  .get(async (req,res) => {
+    try{
+      ticket =  await db.Tickets.findByPK(req.body.id)
+      res.json(ticket)
+    }catch (err){
+      res.json(err)
+    }
+  })
+  .delete(async (req,res) => {
+    try{
+      await db.Tickets.delete({
+        where : {
+          id: req.body.id
+        }
+      })
+      res.send({message: `ticket id ${req.body.id} removed`})
+    } catch (err) {
+      res.json(err)
+    }
+  })*/
 export default router;
