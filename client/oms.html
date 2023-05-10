@@ -40,7 +40,15 @@
     </section>
 
     <section>
-      <h2>Ticket List</h2>
+      <div class = 'filters_div'>
+        <h2>Filter Tickets</h2>
+        <form id ="filters_form">
+          <label for="after_date">After Date</label>
+          <input type="text" id="after_date" name="date" placeholder="yyyy-mm-dd" required><br><br>
+          <input type="submit" value="apply filter">
+        </form>
+      </div>
+      
       <ul id="ticket-list">
         <!-- Placeholder for dynamically generated ticket items -->
         

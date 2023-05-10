@@ -146,7 +146,7 @@ router
         description: req.body.description,
         priority: req.body.priority,
         status: req.body.status,
-        created: moment().format('YYYY-MM-DD'),
+        //created: moment().format('YYYY-MM-DD'),
         location: { type: 'Point', coordinates: [req.body.latitude, req.body.longitude] }
       })
       res.send({ message: "Ticket added" });
@@ -171,7 +171,6 @@ router
       await db.Tickets.update(
         {
         status: 'Resolved',
-        created: moment().format('YYYY-MM-DD')
         },
         {where: 
         {id: req.body.id}

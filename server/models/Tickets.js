@@ -24,10 +24,10 @@ export default (database, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        created: {
+       /* created: {
             type: DataTypes.DATE,
             allowNull: false
-        },
+        },*/
         location: {
             type: DataTypes.GEOMETRY('POINT'),
             allowNull: false
@@ -35,7 +35,7 @@ export default (database, DataTypes) => {
 
       },
 
-      { freezeTableName: true, timestamps:false}
+      { freezeTableName: true, timestamps:true}
     );
     return Tickets;
 };

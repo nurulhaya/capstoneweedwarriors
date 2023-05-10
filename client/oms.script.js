@@ -108,10 +108,30 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
 
     //default ticket display -- shows all unresolved tickets in an unordered list 
     if (tickets.found == true){
-      tickets.data.forEach(element => {
-        if(element.status != 'Resolved' )
-        showTicket(element)});
+      tickets.data.forEach(element => {showTicket(element)});
       CURRENTTICKETID = tickets.data.length
     }
+
+    const filterForm = document.querySelector('#filters_form')
+
+
+    
+    filterForm.addEventListener('submit', function(event){
+      event.preventDefault()
+      var afterDate = document.getElementById('after_date').value
+
+      afterDate = new Date(afterDate)
+      console.log(afterDate)
+      /*
+      if(tickets.found == true){
+        tickets.data.forEach(element=>{
+          console.log((element.created))
+          /*if(Date(element.created) >afterDate){
+            console.log('ok')
+          }
+        })
+      }
+      */
+    })
 
   });
