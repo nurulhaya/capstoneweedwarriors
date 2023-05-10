@@ -24,6 +24,9 @@
 
         <label for="ticket-description">Description:</label><br>
         <textarea id="ticket-description" name="description" required></textarea><br><br>
+        
+        <label for="ticket-location">Location:</label>
+        <textarea name="location" placeholder= "lat,long format - refer to reports table" id="ticket-location"></textarea>
 
         <label for="ticket-priority">Priority:</label>
         <select id="ticket-priority" name="priority" required>
@@ -31,7 +34,7 @@
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select><br><br>
-
+        
         <input type="submit" value="Create Ticket">
       </form>
     </section>

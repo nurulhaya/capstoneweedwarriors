@@ -1,7 +1,7 @@
 import express from "express";
 import sequelize from "sequelize";
 import db from "../database/initializeDB.js";
-
+import moment from "moment"
 const router = express.Router();
 
 router.route("/").get((req, res) => {
@@ -144,7 +144,10 @@ router
       await db.Tickets.create({
         title: req.body.title,
         description: req.body.description,
-        priority: req.body.priority 
+        priority: req.body.priority,
+        status: req.body.status,
+        created: moment().format('YYYY-MM-DD'),
+        location: { type: 'Point', coordinates: [req.body.latitude, req.body.longitude] }
       })
       res.send({ message: "Ticket added" });
     } catch(err) {
@@ -165,33 +168,18 @@ router
   })
   .put(async (req,res) => {
     try{
-      await db.Tickets.update({status: 'Resolved'},{where: {id: req.body.id}}
+      await db.Tickets.update(
+        {
+        status: 'Resolved',
+        created: moment().format('YYYY-MM-DD')
+        },
+        {where: 
+        {id: req.body.id}
+        }
       )
       res.send({message: `ticket id ${req.body.id} has been resolved.`})
     }catch (err){
       res.json(err)
     }
   });
-/*
-router.route('/tickets')
-  .get(async (req,res) => {
-    try{
-      ticket =  await db.Tickets.findByPK(req.body.id)
-      res.json(ticket)
-    }catch (err){
-      res.json(err)
-    }
-  })
-  .delete(async (req,res) => {
-    try{
-      await db.Tickets.delete({
-        where : {
-          id: req.body.id
-        }
-      })
-      res.send({message: `ticket id ${req.body.id} removed`})
-    } catch (err) {
-      res.json(err)
-    }
-  })*/
 export default router;
