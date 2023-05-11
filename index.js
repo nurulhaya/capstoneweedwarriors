@@ -59,6 +59,10 @@ router.get('/map', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/map.html'));
 });
 
+router.get('/tickets', function (req, res) {
+    res.sendFile(path.join(__dirname + '/client/tickets.html'));
+});
+
 app.use('/', router);
 
 app.listen(PORT, () => {

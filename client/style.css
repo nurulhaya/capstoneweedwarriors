@@ -1,6 +1,6 @@
 *:not(.icon) {
   font-family: "Karla", Arial, Helvetica, sans-serif !important;
-  font-size: 1em!important;
+  /* font-size: 1em!important; */
 }
 
 .wrapper {
