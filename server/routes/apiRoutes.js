@@ -1,5 +1,5 @@
 import express from "express";
-import sequelize from "sequelize";
+import sequelize, { where } from "sequelize";
 import db from "../database/initializeDB.js";
 import moment from "moment"
 const router = express.Router();
@@ -106,6 +106,17 @@ router
     } catch (err) {
       res.send(err);
     }
+  })
+  .put(async (req,res) => {
+    try{
+      await db.Reports.update(
+        {ticket_id : req.body.ticket_id},
+        {where: {id: req.body.id}}
+      )
+    res.send({message : `Report ID ${req.body.id} now has an associated ticket`});
+    }catch (err){
+      res.send(err)
+    }
   });
 
 router.route("/custom/:query").get(async (req, res) => {
@@ -145,9 +156,7 @@ router
         title: req.body.title,
         description: req.body.description,
         priority: req.body.priority,
-        status: req.body.status,
-        //created: moment().format('YYYY-MM-DD'),
-        location: { type: 'Point', coordinates: [req.body.latitude, req.body.longitude] }
+        status: req.body.status
       })
       res.send({ message: "Ticket added" });
     } catch(err) {

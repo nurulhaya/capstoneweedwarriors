@@ -1,15 +1,17 @@
 //keep track of index we would be adding a new record to in case of a new form submit
 
 
+
 let CURRENTTICKETID = 0
 document.getElementById('ticket-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
     // Get the form values
+    
     var title = document.getElementById('ticket-title').value;
     var description = document.getElementById('ticket-description').value;
     var priority = document.getElementById('ticket-priority').value;
-    var location = document.getElementById('ticket-location').value
+  
 
     //need date stored yyyy-mm-dd
     var element  = {
@@ -21,15 +23,16 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
       location: location,
       status : 'Pending assignment',
     }
-
     addTicket(element);
-    showTicket(element)
+    showTicket(element);
+   
 
     // Reset the form
     document.getElementById('ticket-form').reset();
   });
+
+  
   async function addTicket(element){
-    const coords = element.location.split(',');
     await fetch("/api/tickets", {
       method: "POST",
       headers: {
@@ -40,8 +43,6 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
         description: element.description,
         priority: element.priority,
         status: element.status, 
-        latitude: parseFloat(coords[0]),
-        longitude: parseFloat(coords[1])
       }),
     })
       .then((res) => res.json())
@@ -94,9 +95,8 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
     // Ticket is removed from list on front end, but remains in tickets table
     document.getElementById('ticket-list').removeChild(ticketItem);
   }
-  function updateTicket(){
-    //in case of clerical issue, just update the fields, really just fill out the form again ???
-    console.log('updated');
+  function cleartickets(){
+    //helper function to clear, and then allow repopulation of ticket items
   }
   function getNextTicketID(){
     return CURRENTTICKETID+=1;
@@ -113,25 +113,40 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
     }
 
     const filterForm = document.querySelector('#filters_form')
+    const resetfilters = document.querySelector('#tickets_reset')
 
+    resetfilters.addEventListener('click', function(event){
+      event.preventDefault()
+      cleartickets();
+      if (tickets.found == true){
+        tickets.data.forEach(element => {showTicket(element)});
+      }
+    });
 
+    function pgFormatDate(date) {
+      /* Via http://stackoverflow.com/questions/3605214/javascript-add-leading-zeroes-to-date */
+      function zeroPad(d) {
+        return ("0" + d).slice(-2)
+      }
+    
+      var parsed = new Date(date)
+    
+      return [parsed.getUTCFullYear(), zeroPad(parsed.getMonth() + 1), zeroPad(parsed.getDate()), zeroPad(parsed.getHours()), zeroPad(parsed.getMinutes()), zeroPad(parsed.getSeconds())].join(" ");
+    }
     
     filterForm.addEventListener('submit', function(event){
       event.preventDefault()
       var afterDate = document.getElementById('after_date').value
 
-      afterDate = new Date(afterDate)
+      afterDate = pgFormatDate(Date(afterDate))
       console.log(afterDate)
-      /*
+      cleartickets();
       if(tickets.found == true){
         tickets.data.forEach(element=>{
-          console.log((element.created))
-          /*if(Date(element.created) >afterDate){
-            console.log('ok')
+          if(element.createdAt > afterDate){
+            showTicket(element)
           }
         })
       }
-      */
     })
-
   });

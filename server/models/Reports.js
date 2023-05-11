@@ -41,10 +41,14 @@ export default (database, DataTypes) => {
           allowNull: false,
           defaultValue: false
         },
+        ticket_id: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+        }
       },
       {
         freezeTableName: true,
-        timestamps: false
+        timestamps: true
         // timestamps: true,
         // createdAt: true,
         // updatedAt: false,

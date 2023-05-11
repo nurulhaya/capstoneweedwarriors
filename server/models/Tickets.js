@@ -24,15 +24,6 @@ export default (database, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-       /* created: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },*/
-        location: {
-            type: DataTypes.GEOMETRY('POINT'),
-            allowNull: false
-        }
-
       },
 
       { freezeTableName: true, timestamps:true}
