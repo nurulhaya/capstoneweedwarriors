@@ -95,9 +95,6 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
     // Ticket is removed from list on front end, but remains in tickets table
     document.getElementById('ticket-list').removeChild(ticketItem);
   }
-  function cleartickets(){
-    //helper function to clear, and then allow repopulation of ticket items
-  }
   function getNextTicketID(){
     return CURRENTTICKETID+=1;
   }
@@ -117,7 +114,7 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
 
     resetfilters.addEventListener('click', function(event){
       event.preventDefault()
-      cleartickets();
+      clearTickets();
       if (tickets.found == true){
         tickets.data.forEach(element => {showTicket(element)});
       }
@@ -140,7 +137,7 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
 
       afterDate = pgFormatDate(Date(afterDate))
       console.log(afterDate)
-      cleartickets();
+      clearTickets();
       if(tickets.found == true){
         tickets.data.forEach(element=>{
           if(element.createdAt > afterDate){
@@ -150,3 +147,7 @@ document.getElementById('ticket-form').addEventListener('submit', function(e) {
       }
     })
   });
+
+  function clearTickets(){
+    document.querySelector('#ticket-list').innerHTML = ''
+  }
