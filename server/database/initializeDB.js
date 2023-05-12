@@ -6,7 +6,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const sequelizeDB = new Sequelize(process.env.PGURI, {
-  logging: false,
+  // logging: false,
 });
 
 try {

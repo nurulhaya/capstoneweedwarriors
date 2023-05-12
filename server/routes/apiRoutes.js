@@ -1,7 +1,6 @@
 import express from "express";
-import sequelize, { where } from "sequelize";
+import sequelize from "sequelize";
 import db from "../database/initializeDB.js";
-import moment from "moment"
 const router = express.Router();
 
 router.route("/").get((req, res) => {
@@ -92,30 +91,38 @@ router
   })
   .post(async (req, res) => {
     try {
+      const now = await db.sequelizeDB.query("SELECT NOW();", {
+        type: sequelize.QueryTypes.SELECT,
+      });
       await db.Reports.create({
-        timestamp: req.body.timestamp,
         catalog_id: req.body.catalog_id,
-        location: { type: 'Point', coordinates: [req.body.latitude, req.body.longitude] },
+        location: {
+          type: "Point",
+          coordinates: [req.body.latitude, req.body.longitude],
+        },
         severity_id: req.body.severity_id,
         media_id: req.body.media_id,
         comments: req.body.comments,
         user_id: req.body.user_id,
         verified: false,
+        created: now[0].now
       });
       res.send({ message: "Report added" });
     } catch (err) {
       res.send(err);
     }
   })
-  .put(async (req,res) => {
-    try{
+  .put(async (req, res) => {
+    try {
       await db.Reports.update(
-        {ticket_id : req.body.ticket_id},
-        {where: {id: req.body.id}}
-      )
-    res.send({message : `Report ID ${req.body.id} now has an associated ticket`});
-    }catch (err){
-      res.send(err)
+        { ticket_id: req.body.ticket_id },
+        { where: { id: req.body.id } }
+      );
+      res.send({
+        message: `Report ID ${req.body.id} now has an associated ticket`,
+      });
+    } catch (err) {
+      res.send(err);
     }
   });
 
@@ -130,10 +137,6 @@ router.route("/custom/:query").get(async (req, res) => {
   }
 });
 
-//oms routes -- need to dynamically populate tickets list, maybe allow a search function through it,
-//definitely need to have simple post to add to the list
-//we can assume at ticket stage this has been validated to some extent
-
 router
   .route("/tickets")
   .get(async (req, res) => {
@@ -141,53 +144,60 @@ router
       const tickets = await db.Tickets.findAll();
       const result =
         tickets.length > 0
-          ? { data: tickets,
-              found: true}
-          : { message: "There are currently no tickets." ,
-              found: false};
+          ? { data: tickets }
+          : { message: "No results found" };
       res.json(result);
     } catch (err) {
       res.json(err);
     }
   })
-  .post(async (req, res) => { 
-    try{
+  .post(async (req, res) => {
+    try {
+      const now = await db.sequelizeDB.query("SELECT NOW();", {
+        type: sequelize.QueryTypes.SELECT,
+      });
       await db.Tickets.create({
         title: req.body.title,
         description: req.body.description,
         priority: req.body.priority,
-        status: req.body.status
-      })
-      res.send({ message: "Ticket added" });
-    } catch(err) {
-      res.json(err)
-    }
-  })
-  .delete(async (req,res) => {
-    try{
-      await db.Tickets.destroy({
-        where : {
-          id: req.body.id
-        }
-      })
-      res.send({message: `ticket id ${req.body.id} removed.`})
+        status: req.body.status,
+        report_id: req.body.report_id,
+        created: now[0].now,
+        last_modified: now[0].now,
+      });
+      res.json({ message: "Ticket added" });
     } catch (err) {
-      res.json(err)
+      res.json(err);
     }
   })
-  .put(async (req,res) => {
-    try{
+  .delete(async (req, res) => {
+    try {
+      await db.Tickets.destroy({
+        where: {
+          id: req.body.id,
+        },
+      });
+      res.send({ message: `ticket id ${req.body.id} removed.` });
+    } catch (err) {
+      res.json(err);
+    }
+  })
+  .put(async (req, res) => {
+    try {
+      const now = await db.sequelizeDB.query("SELECT NOW();", {
+        type: sequelize.QueryTypes.SELECT,
+      });
+      console.log(now[0].now);
       await db.Tickets.update(
         {
-        status: 'Resolved',
+          status: "Resolved",
+          last_modified: now[0].now,
         },
-        {where: 
-        {id: req.body.id}
-        }
-      )
-      res.send({message: `ticket id ${req.body.id} has been resolved.`})
-    }catch (err){
-      res.json(err)
+        { where: { id: req.body.id } }
+      );
+      res.send({ message: `Ticket #${req.body.id} has been resolved.` });
+    } catch (err) {
+      res.json(err);
     }
   });
 export default router;
