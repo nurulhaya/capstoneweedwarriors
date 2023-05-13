@@ -52,12 +52,11 @@ img {
   margin-top: 10px;
   margin-right: 10px;
   width: 50%;
-  font-size: .85em!important;
+  font-size: 0.85em !important;
 }
 
 #plantOptions {
   display: flex;
-
 }
 
 #uploadedFilePath {
@@ -76,8 +75,11 @@ img {
   color: red;
 }
 
-#map { height: 180px; margin-bottom: 20px;}
+#map {
+  height: 180px;
+  margin-bottom: 20px;
+}
 
 .leaflet-control-attribution {
-  display:none!important
+  display: none !important;
 }

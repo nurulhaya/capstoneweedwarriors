@@ -51,10 +51,6 @@ router.get('/oms', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/oms.html'));
 });
 
-router.get('/map', function (req, res) {
-    res.sendFile(path.join(__dirname + '/client/map.html'));
-});
-
 app.use('/', router);
 
 app.listen(PORT, () => {

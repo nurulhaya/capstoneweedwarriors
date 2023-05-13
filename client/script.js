@@ -42,7 +42,7 @@ function setUserCoordinates(position) {
     enableHighAccuracy: true,
     // watch:true
     // https://leafletjs.com/reference.html#locate-options
-  })
+  });
   L.marker([lat, lon]).addTo(map);
 }
 

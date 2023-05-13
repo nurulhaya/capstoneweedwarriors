@@ -1,25 +1,25 @@
 export default (database, DataTypes) => {
   const Catalog = database.define(
-    'catalog',
+    "catalog",
     {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       usda_symbol: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       latin_name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       common_name: {
         type: DataTypes.STRING,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     },
     { freezeTableName: true, timestamps: false }
   );

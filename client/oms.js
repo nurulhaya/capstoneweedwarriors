@@ -45,10 +45,10 @@ function updateTicketsTable(data) {
         ) {
           const date = row[header];
           bodyhtml += `<td>${new Date(date)
-            .toLocaleString().split(',')[0]
+            .toLocaleString()
+            .split(",")[0]
             .replace(",", "")
-            .replace(/:\d+ /, " ")
-          }
+            .replace(/:\d+ /, " ")}
             </td>`;
         } else {
           bodyhtml += `<td>${row[header]}</td>`;
@@ -132,7 +132,7 @@ async function updateReportsTable(data) {
         }
       });
       bodyhtml += `<td>`;
-      if (!reportIDs.map(r => r.report_id).includes(row.id)) {
+      if (!reportIDs.map((r) => r.report_id).includes(row.id)) {
         bodyhtml += `<button class="tiny ui create basic button" name=${row.id}>Create ticket</button>`;
       }
       bodyhtml += `</td></tr>`;
@@ -227,67 +227,67 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.querySelectorAll(".create.button").forEach((button) => {
     button.addEventListener("click", async (e) => {
-    const reportID = e.target.name;
-      $('.ui.modal')
-      .modal({
-        blurring: true
-      }).modal('show');
-      $('.ui.newticket').form({
-        fields: {
-          title: "empty",
-          description: "empty",
-          priority: "empty",
-          report_id: "empty",
-        },
-      })
-      .form("set values", {
-        title: await getReportInfo(reportID),
-        description: "New ticket created from report",
-        report_id: parseInt(reportID),
-      });
-      
+      const reportID = e.target.name;
+      $(".ui.modal")
+        .modal({
+          blurring: true,
+        })
+        .modal("show");
+      $(".ui.newticket")
+        .form({
+          fields: {
+            title: "empty",
+            description: "empty",
+            priority: "empty",
+            report_id: "empty",
+          },
+        })
+        .form("set values", {
+          title: await getReportInfo(reportID),
+          description: "New ticket created from report",
+          report_id: parseInt(reportID),
+        });
     });
   });
   const $newTicketForm = $(".ui.newticket");
-    $newTicketForm.on("submit", async function (e) {
-        e.preventDefault();
-        const input = $newTicketForm.form("get values");
-        if ($newTicketForm.form("is valid")) {
-        await createTicket(input);
-        location.reload();
-        }
-    });
+  $newTicketForm.on("submit", async function (e) {
+    e.preventDefault();
+    const input = $newTicketForm.form("get values");
+    if ($newTicketForm.form("is valid")) {
+      await createTicket(input);
+      location.reload();
+    }
+  });
 });
 async function getReportInfo(reportID) {
-    const dataFetch = await fetch(`/api/custom/SELECT c.common_name, s.category FROM reports
+  const dataFetch =
+    await fetch(`/api/custom/SELECT c.common_name, s.category FROM reports
     JOIN severity s on s.id = reports.severity_id
     JOIN catalog c on reports.catalog_id = c.id
     WHERE reports.id = ${reportID};`);
-    const result = await dataFetch.json();
-    console.log(result);
-    return `${result[0].common_name} - ${result[0].category}`;
+  const result = await dataFetch.json();
+  console.log(result);
+  return `${result[0].common_name} - ${result[0].category}`;
 }
 
 async function createTicket(input) {
-    await fetch("/api/tickets", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: capitalize(input.title),
-          description: capitalize(input.description),
-          priority: capitalize(input.priority),
-          status: 'Not started', 
-          report_id: input.report_id,
-        }),
-      })
-        .then((res) => res.json())
-        .then((json) => console.log(json));
+  await fetch("/api/tickets", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: capitalize(input.title),
+      description: capitalize(input.description),
+      priority: capitalize(input.priority),
+      status: "Not started",
+      report_id: input.report_id,
+    }),
+  })
+    .then((res) => res.json())
+    .then((json) => console.log(json));
 }
 
-
-function capitalize(word){
-    return word.charAt(0).toUpperCase()
-    + word.slice(1)
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
 }
