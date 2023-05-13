@@ -7,11 +7,6 @@ dotenv.config();
 
 const sequelizeDB = new Sequelize(process.env.PGURI, {
   // logging: false,
-  // pool: {
-  //     max:5,
-  //     min:0,
-  //     idle:10000
-  // }
 });
 
 try {

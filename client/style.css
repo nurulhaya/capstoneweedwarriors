@@ -1,6 +1,6 @@
 *:not(.icon) {
   font-family: "Karla", Arial, Helvetica, sans-serif !important;
-  font-size: 1em !important;
+  /* font-size: 1em!important; */
 }
 
 .wrapper {
@@ -9,14 +9,13 @@
 }
 
 .container {
-  max-width: 960px;
   margin: auto;
 }
 
 @media only screen and (min-width: 600px) {
   .container {
-    min-width: 550px;
-    width: 50%;
+    min-width: 720px;
+    width: 40%;
   }
 }
 

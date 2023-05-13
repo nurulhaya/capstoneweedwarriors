@@ -8,10 +8,6 @@ export default (database, DataTypes) => {
           allowNull: false,
           primaryKey: true,
         },
-        // timestamp: {
-        //   type: DataTypes.STRING,
-        //   allowNull: false,
-        // },
         catalog_id: {
           type: DataTypes.INTEGER,
           allowNull: false,
@@ -41,13 +37,14 @@ export default (database, DataTypes) => {
           allowNull: false,
           defaultValue: false
         },
+        created: {
+            type: DataTypes.DATE,
+            allowNull: false
+        }
       },
       {
         freezeTableName: true,
         timestamps: false
-        // timestamps: true,
-        // createdAt: true,
-        // updatedAt: false,
       }
     );
     return Reports;

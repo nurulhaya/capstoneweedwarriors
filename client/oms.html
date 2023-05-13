@@ -1,54 +1,204 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Ticketing System</title>
-  <link rel="stylesheet" href="oms.style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="images/favicon.ico" />
+  <title>Weed Warriors</title>
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" />
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+  <link rel="stylesheet" href="//brick.freetls.fastly.net/Karla:400,700,400i,700i" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="oms.js" type="module"></script>
+  <style>
+    .box {
+      border: 1px solid #eee;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .button:not(.resolve, .create) {
+      margin-top: 20px !important;
+    }
+
+    .resolve i,
+    .create i {
+      margin: 0 !important;
+
+    }
+    .bottom .button {
+      margin-top:10px!important
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+    }
+
+    .inline .field {
+      display: inline-block !important;
+    }
+
+    #table {
+      margin-top: 20px;
+    }
+
+    tr {
+      height: 45px !important;
+    }
+
+    .bottom {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+    .field {
+      margin-right: 10px!important
+    }
+  </style>
 </head>
+
 <body>
-  <header>
-    <h1>Ticketing System</h1>
-  </header>
+  <div class="wrapper">
+    <div class="container">
+      <div class="ui secondary menu">
+        <a class="item active" data-tab="reports">Reports</a>
+        <a class="item" data-tab="tickets">Tickets</a>
+      </div>
+      <div class="ui tab" data-tab="tickets">
+        <div class="box">
+          <h1>Filter tickets</h1>
+          <form class="ui ticketsform inline">
+            <div class="field">
+              <label>Status</label>
+              <div class="ui selection dropdown">
+                <input type="hidden" name="status" id="status" />
+                <i class="dropdown icon"></i>
+                <div class="default text"></div>
+                <div class="menu">
+                  <div class="item" data-value="all">All</div>
+                  <div class="item" data-value="not started">Not started</div>
+                  <div class="item" data-value="assigned">Assigned</div>
+                  <div class="item" data-value="resolved">Resolved</div>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Priority</label>
+              <div class="ui selection priority dropdown">
+                <input type="hidden" name="priority" id="priority" />
+                <i class="dropdown icon"></i>
+                <div class="default text"></div>
+                <div class="menu">
+                  <div class="item" data-value="all">All</div>
+                  <div class="item" data-value="low">Low</div>
+                  <div class="item" data-value="medium">Medium</div>
+                  <div class="item" data-value="high">High</div>
+                </div>
+              </div>
+            </div>
+            <div class="bottom">
+              <button class="ui button" id="searchBtn">Search</button>
+            </div>
+          </form>
+        </div>
+        <!-- <div class="ui info message">
+          See reports tab to create a ticket
+        </div> -->
+        <div id="table">
+          <table class="ui sortable selectable compact table" id="tablecontents">
+            <thead id="tableheader"></thead>
+            <tbody id="tablebody"></tbody>
+          </table>
+        </div>
+      </div>
 
-  <main>
-    <section>
-      <h2>Create a New Ticket</h2>
-      <form id="ticket-form">
-        <label for="ticket-type">Ticket Type:</label>
-        <select id="ticket-type" name="type" required>
-          <option value="weed-removal">Weed Removal</option>
-          <option value="weed-identification">Weed Identification</option>
-        </select><br><br>
 
-        <label for="ticket-title">Title:</label>
-        <input type="text" id="ticket-title" name="title" required><br><br>
 
-        <label for="ticket-description">Description:</label><br>
-        <textarea id="ticket-description" name="description" required></textarea><br><br>
 
-        <label for="ticket-priority">Priority:</label>
-        <select id="ticket-priority" name="priority" required>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select><br><br>
 
-        <input type="submit" value="Create Ticket">
+
+
+
+
+
+
+
+
+      <div class="ui tab active" data-tab="reports">
+        <div class="box">
+          <h1>Filter reports</h1>
+          <form class="ui reportsform inline">
+            <div class="field">
+              <label>Severity</label>
+              <div class="ui selection dropdown">
+                <input type="hidden" name="severity" id="severity" />
+                <i class="dropdown icon"></i>
+                <div class="default text"></div>
+                <div class="menu">
+                  <div class="item" data-value="all">All</div>
+                  <div class="item" data-value="low">10-50%</div>
+                  <div class="item" data-value="high">60-100%</div>
+                </div>
+              </div>
+            </div>
+            <div class="bottom">
+              <button class="ui button" id="reportsSearchBtn">Search</button>
+            </div>
+          </form>
+        </div>
+        <div id="table">
+          <table class="ui sortable selectable compact table">
+            <thead id="reportstableheader"></thead>
+            <tbody id="reportstablebody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui tiny modal">
+    <div class="content">
+      <h1>Create a new ticket</h1>
+      <form class="ui newticket form">
+        <div class="field">
+          <label>Title</label>
+          <div class="ui input">
+            <input type="text" name="title">
+          </div>
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <div class="ui input">
+            <input type="text" name="description">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Priority</label>
+          <div class="ui selection dropdown">
+            <input type="hidden" name="priority" />
+            <i class="dropdown icon"></i>
+            <div class="default text">Select priority</div>
+            <div class="menu">
+              <div class="item" data-value="low">Low</div>
+              <div class="item" data-value="medium">Medium</div>
+              <div class="item" data-value="high">High</div>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Report #</label>
+          <div class="ui disabled input">
+            <input type="text" name="report_id">
+          </div>
+        </div>
+        <button class="ui primary button" type="submit">Submit</button>
       </form>
-    </section>
-
-    <section>
-      <h2>Ticket List</h2>
-      <ul id="ticket-list">
-        <!-- Placeholder for dynamically generated ticket items -->
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-    <p>Footer content goes here.</p>
-  </footer>
-
-  <script src="oms.script.js" type="module"></script>
- 
+    </div>
+  </div>
 </body>
+
 </html>
