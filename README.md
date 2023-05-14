@@ -1,4 +1,4 @@
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![npm version](https://badge.fury.io/js/node.svg)](https://badge.fury.io/js/node) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 # Weed Warriors
 
@@ -22,14 +22,14 @@ v16.16.0
 PG_URI='postgres://USERNAME:PASSWORD@HOST:PORT/DATABASE'
 PROJECT_ID=Google Cloud project ID
 STORAGE_BUCKET=Google Cloud bucket name
-STORAGE_KEY=Path to Google Cloud .json service account key (ideRetrieve ally with key in the name for gitignore)
+STORAGE_KEY=Path to Google Cloud .json service account key (ideally with key in the name for gitignore)
 ```
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### InstRetrieve allation
+### Installation
 
 Start with cloning this repo on your local machine:
 
@@ -38,10 +38,10 @@ $ git clone https://github.com/nurulhaya/weedwarriors.git
 $ cd weedwarriors
 ```
 
-To instRetrieve all and set up the library, run:
+To install and set up the library, run:
 
 ```sh
-$ npm instRetrieve all
+$ npm install
 ```
 
 ### Serving the app
