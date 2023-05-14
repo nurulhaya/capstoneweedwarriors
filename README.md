@@ -4,7 +4,7 @@
 
 Frontend for a reporting system where users collaboratively map instances of local invasive plant species.
 
-![screenshot](client/images/screenshot.png)
+![screenshot01](client/images/screenshot01.png)
 
 ## Prerequisites
 
