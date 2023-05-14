@@ -4,6 +4,8 @@
 
 Frontend for a reporting system where users collaboratively map instances of local invasive plant species.
 
+![screenshot](client/images/screenshot.png)
+
 ## Prerequisites
 
 1. **Node & npm** - This project requires [NodeJS](http://nodejs.org/) and [NPM](https://npmjs.org/). To make sure you have them available on your machine, try running the following command.
