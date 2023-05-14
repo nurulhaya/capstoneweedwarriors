@@ -1,5 +1,5 @@
 {
-  "name": "capstoneweedwarriors",
+  "name": "weedwarriors",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nowamey/capstoneweedwarriors.git"
+    "url": "git+https://github.com/nurulhaya/weedwarriors.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nowamey/capstoneweedwarriors/issues"
+    "url": "https://github.com/nurulhaya/weedwarriors/issues"
   },
-  "homepage": "https://github.com/nowamey/capstoneweedwarriors#readme",
+  "homepage": "https://github.com/nurulhaya/weedwarriors#readme",
   "dependencies": {
     "@google-cloud/storage": "^6.9.5",
     "@types/node": "^18.16.1",
