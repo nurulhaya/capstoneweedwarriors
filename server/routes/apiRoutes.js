@@ -98,9 +98,9 @@ router
         catalog_id: req.body.catalog_id,
         location: {
           type: "Point",
-          coordinates: [req.body.latitude, req.body.longitude],
+          coordinates: [parseFloat(req.body.latitude), parseFloat(req.body.longitude)],
         },
-        severity_id: req.body.severity_id,
+        severity_id: Math.round(req.body.severity / 10),
         media_id: req.body.media_id,
         comments: req.body.comments,
         user_id: req.body.user_id,

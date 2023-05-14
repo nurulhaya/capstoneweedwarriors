@@ -135,10 +135,9 @@ async function addReport(mediaID, userID, userInput) {
     },
     body: JSON.stringify({
       catalog_id: userInput.plant.split(",")[0],
-      latitude: parseFloat(coordinates[0]),
-      longitude: parseFloat(coordinates[1]),
-      location: userInput.position,
-      severity_id: Math.round(userInput.severity / 10),
+      latitude: coordinates[0],
+      longitude: coordinates[1],
+      severity: userInput.severity,
       media_id: mediaID,
       comments: userInput.comments,
       user_id: userID,
