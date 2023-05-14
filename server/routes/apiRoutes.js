@@ -98,14 +98,17 @@ router
         catalog_id: req.body.catalog_id,
         location: {
           type: "Point",
-          coordinates: [parseFloat(req.body.latitude), parseFloat(req.body.longitude)],
+          coordinates: [
+            parseFloat(req.body.latitude),
+            parseFloat(req.body.longitude),
+          ],
         },
         severity_id: Math.round(req.body.severity / 10),
         media_id: req.body.media_id,
         comments: req.body.comments,
         user_id: req.body.user_id,
         verified: false,
-        created: now[0].now
+        created: now[0].now,
       });
       res.send({ message: "Report added" });
     } catch (err) {
