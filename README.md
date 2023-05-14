@@ -1,22 +1,33 @@
-<!-- [![npm version](https://badge.fury.io/js/node.svg)](https://badge.fury.io/js/node)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) -->
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
+<details>
+  <summary>Code example</summary>
+  <p>
+    ...
+  </p>
+</details>
 
 # Weed Warriors
 
-> Frontend for a reporting system where users collaboratively map instances of local invasive plant species. 
 
 ## Prerequisites
-
-This project requires [NodeJS](http://nodejs.org/) and [NPM](https://npmjs.org/). 
-
-To make sure you have them available on your machine,
-try running the following command.
+1. **Node & npm** - This project requires [NodeJS](http://nodejs.org/) and [NPM](https://npmjs.org/). To make sure you have them available on your machine, try running the following command.
 
 ```sh
 $ npm -v "&&" node -v
 8.11.0
 v16.16.0
 ```
+2. **Google Cloud Storage** - Follow the steps in this article to create a Google Cloud Storage account for uploading images: [Image Upload With Google Cloud Storage and Node.js](https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876)
+3. **Postgres database** - Download a database administration platform for Postgres like [pgAdmin](https://www.pgadmin.org) and create an empty database, then run the [creation script](/prereq/weedwarriors_pgcreate.sql) to instantiate tables. 
+4. **Environment variables** - Create a .env file with the following variables:
+```
+PGURI='postgres://USERNAME:PASSWORD@HOST:PORT/DATABASE'
+GCPROJECT_ID=Google Cloud project ID
+GCBUCKET=Google Cloud bucket name
+GCKEYS=Path to Google Cloud .json service account key
+```
+
 
 <!-- ## Table of contents
 
