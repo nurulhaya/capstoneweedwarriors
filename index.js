@@ -16,13 +16,13 @@ const multer = Multer({
     },
 });
 
-let projectId = process.env.GCPROJECT_ID;
-let keyFilename = process.env.GCKEYS;
+let projectId = process.env.PROJECT_ID;
+let keyFilename = process.env.STORAGE_KEY;
 const storage = new Storage({
     projectId,
     keyFilename,
 });
-const bucket = storage.bucket(process.env.GCBUCKET);
+const bucket = storage.bucket(process.env.STORAGE_BUCKET);
 const app = express();
 const PORT = process.env.PORT || 3000;
 

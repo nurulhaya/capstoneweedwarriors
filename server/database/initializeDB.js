@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
-const sequelizeDB = new Sequelize(process.env.PGURI, {
+const sequelizeDB = new Sequelize(process.env.PG_URI, {
   // logging: false,
 });
 

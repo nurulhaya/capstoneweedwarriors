@@ -12,13 +12,13 @@ $ npm -v "&&" node -v
 v16.16.0
 ```
 2. **Google Cloud Storage** - Follow the steps in this article to create a Google Cloud Storage account for uploading images: [Image Upload With Google Cloud Storage and Node.js](https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876)
-3. **Postgres database** - Download a database administration platform for Postgres like [pgAdmin](https://www.pgadmin.org) and create an empty database, then run the [creation script](/prereq/weedwarriors_pgcreate.sql) to instantiate tables. 
+3. **Postgres database** - Download a database administration platform for Postgres like [pgAdmin](https://www.pgadmin.org) and create an empty database, then run the [creation script](/prereq/weedwarriors_pgcreate.sql) to instantiate tables. Import [catalog](/prereq/weedwarriors_catalog.csv) and [severity](/prereq/weedwarriors_severity.csv) data into respective tables. 
 4. Create a .env file with the following variables:
 ```
-PGURI='postgres://USERNAME:PASSWORD@HOST:PORT/DATABASE'
-GCPROJECT_ID=Google Cloud project ID
-GCBUCKET=Google Cloud bucket name
-GCKEYS=Path to Google Cloud .json service account key
+PG_URI='postgres://USERNAME:PASSWORD@HOST:PORT/DATABASE'
+PROJECT_ID=Google Cloud project ID
+STORAGE_BUCKET=Google Cloud bucket name
+STORAGE_KEY=Path to Google Cloud .json service account key (ideally with key in the name for gitignore)
 ```
 
 <!-- ## Table of contents
