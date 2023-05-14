@@ -10,8 +10,8 @@ Frontend for a reporting system where users collaboratively map instances of loc
 
 ```sh
 $ npm -v "&&" node -v
-8.11.0
-v16.16.0
+9.6.4
+v20.1.0
 ```
 
 2. **Google Cloud Storage** - Follow the steps in this article to create a Google Cloud Storage account for uploading images: [Image Upload With Google Cloud Storage and Node.js](https://medium.com/@olamilekan001/image-upload-with-google-cloud-storage-and-node-js-a1cf9baa1876)
@@ -54,6 +54,7 @@ $ npm start
 See: [HTTP primer for frontend developers]() and [primer on JavaScript `fetch()` method](https://javascript.info/fetch)
 #### Catalog
 - GET `/api/catalog` - Retrieve all data catalog entries in the database.
+<br/>
 
 #### Media
 - GET `/api/media` - Retrieve all media entries in the database.
@@ -164,3 +165,7 @@ await fetch("/api/users", {
 ```
 
 </details>
+<br/>
+
+## Hosting options
+Both the database and live web application can be hosted for free on [Render](https://render.com) (see [Configuring Environment Variables and Secrets](https://render.com/docs/configure-environment-variables)).
